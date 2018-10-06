@@ -1,0 +1,62 @@
+﻿<Page
+    x:Class="ContactManagement.Default"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ContactManagement"
+    xmlns:data="using:ContactManagement.Model" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.TopAppBar>
+        <AppBar>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Back" Width="140" Height="40" 
+                            Name="btnBack" Click="btnBack_Click"/>
+                    <Button Content="List" Width="140" Height="40" 
+                            Name="btnList" Click="btnList_Click"/>
+                    <Button Content="New" Width="140" Height="40" 
+                            Name="btnNew" Click="btnNew_Click"/>
+                </StackPanel>
+            </Grid>
+        </AppBar>
+    </Page.TopAppBar>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="5*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical">
+            <TextBlock FontSize="20" Name="title" Text="LIST CONTACT"
+                   Margin="50,10,0,0" HorizontalAlignment="Center" ></TextBlock>
+            <TextBlock Name="ltrError" FontStyle="Italic" FontWeight="Bold" Foreground="Red"
+                   Margin="20,5,0,5" HorizontalAlignment="Center" ></TextBlock>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <TextBlock Text="Tìm tên: " VerticalAlignment="Center" Margin="20,5,0,5"></TextBlock>
+            <AutoSuggestBox Name="txtNewString" TextChanged="txtNewString_TextChanged" VerticalAlignment="Center"
+                   Margin="20,5,0,5" Width="220" ></AutoSuggestBox>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Vertical" HorizontalAlignment="Center" 
+                    Margin="0,0,0,25" >
+            <ListView ItemsSource="{x:Bind ListContact}" Name="viewContact" Width="600" 
+                      Background="LightBlue" SelectionChanged="viewContact_SelectionChanged">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="data:Contact">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5,5,5,5">
+                            <TextBlock Name="name" Text="{Binding Name}" Margin="20,5,0,5" Width="150"></TextBlock>
+                            <TextBlock Text="{Binding Mobile}" Margin="20,5,0,5" Width="150"></TextBlock>
+                            <TextBlock Text="{Binding GroupName}" Margin="20,5,0,5" Width="150"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+    </Grid>
+</Page>
